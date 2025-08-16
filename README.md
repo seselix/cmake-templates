@@ -3,6 +3,14 @@
 This project template allows one to easily build and run multiple c++ executables and libraries with minimal setup.
 It also is set to automatically generate the files needed for clangd, but it is not required.
 
+## Branches
+
+> cmake-templates is designed to be cloned and then .git deleted, as a complete
+> new start to your project.
+
+1. `main` branch is the basic setup. A blank canvas for your use.
+2. `dearimgui` includes changes to download imgui and get it running. Currently only MacOS has been tested.
+
 ## Basic Usage
 
 ### Setup
