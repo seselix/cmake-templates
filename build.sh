@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Build directory
+BUILD_DIR="build"
+
+# Create and configure if it doesn't exist
+if [ ! -d "$BUILD_DIR" ]; then
+    mkdir "$BUILD_DIR"
+    cmake -S . -B "$BUILD_DIR"
+fi
+
+# Build everything
+cmake --build "$BUILD_DIR"
+
+# Find all executables (only in build/src)
+EXECUTABLES=($(find "$BUILD_DIR/src" -maxdepth 2 -type f -perm +111))
+
+if [ ${#EXECUTABLES[@]} -eq 0 ]; then
+    echo "No executables found."
+    exit 1
+fi
+
+# If multiple executables, ask user
+if [ ${#EXECUTABLES[@]} -gt 1 ]; then
+    echo "Select an executable to run:"
+    select exe in "${EXECUTABLES[@]}"; do
+        "$exe"
+        break
+    done
+else
+    "${EXECUTABLES[0]}"
+fi
+
