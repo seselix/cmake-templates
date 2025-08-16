@@ -19,7 +19,7 @@ fi
 if [ ! -d "$IMGUI_DIR" ]; then
   git clone "$IMGUI_GIT"
 fi
-if [ ! -z "$SRC_DIR/imgui/imgui.h" ]; then
+if [ ! -d "$SRC_DIR/imgui" ]; then
   mkdir "$SRC_DIR/imgui"
   ln imgui/im* imgui/LICENSE* imgui/backends/imgui_impl_glfw.* imgui/backends/imgui_impl_opengl3* "$SRC_DIR"/imgui/
 fi
