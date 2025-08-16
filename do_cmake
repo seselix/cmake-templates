@@ -4,11 +4,24 @@ set -e
 
 # Build directory
 BUILD_DIR="build"
+SRC_DIR="src/app1"
+
+IMGUI_DIR="imgui"
+IMGUI_GIT="https://github.com/ocornut/imgui"
 
 # Create and configure if it doesn't exist
 if [ ! -d "$BUILD_DIR" ]; then
     mkdir "$BUILD_DIR"
     cmake -S . -B "$BUILD_DIR"
+fi
+
+# git clone imgui if it doesn't already exist
+if [ ! -d "$IMGUI_DIR" ]; then
+  git clone "$IMGUI_GIT"
+fi
+if [ ! -z "$SRC_DIR/imgui/imgui.h" ]; then
+  mkdir "$SRC_DIR/imgui"
+  ln imgui/im* imgui/LICENSE* imgui/backends/imgui_impl_glfw.* imgui/backends/imgui_impl_opengl3* "$SRC_DIR"/imgui/
 fi
 
 # Build everything
